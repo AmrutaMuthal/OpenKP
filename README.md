@@ -1,19 +1,40 @@
 # Key Phrase extraction
 Keyphrase extraction is a language problem represented as: There is a document D in which there are 1-n key phrases which can be used to understand what the document is about, find other relevant documents, and improve many downstream NLP problems.
-In OpenKP we have formalized this problem to focus on the general web domain. The corpus consists of websites which were human annotated for their most relevant key phrases. Its worth noting that during the expert annotation, judges only copied the relevant text from the document and thus there is no language generation required. 
 
-# 
+# Requirements
+```
+!pip install tokenizers
+!pip install transformers
+!pip install nltk
+!pip install pickle
+!pip install tensorflow
+!pip install numpy
+!pip install matplotlib
+import nltk
+nltk.download('stopwords')
+```
+
+# How to run the demo
+Provided all the prerequisite packages are installed.The model can be genrated using the model definition in the models folder. Data processing utils can be accessed from the utils folder. Use the code below to load a checkpoint.Chekpoint link: [ https://drive.google.com/drive/folders/1GmQgNsjGP7OpspjzsMackE89REMDpNLd] The checkpoints at this link are for the large model. For this model l1=120 and l2=12. The demo notebook has the predict_kps function which preprocessed the data and generates KPs. For inspeck checkpoint max_kp=154 and for KP20, max_kp=258. max_len is the max_length of the embedding = 512
+```
+from models import extractor as ext
+from utils import extractionUtils as extUtil
+
+max_len = 512
+max_kp = 154
+
+# use model configuration according to training 
+tp_model = ext.get_model(max_len,max_kp,l1,l2)
+
+tp_model.load_weights('/path/to/checkpoint/')
+
+
+```
 
 # Contributing
-
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
