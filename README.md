@@ -34,6 +34,8 @@ tp_model.load_weights('/path/to/checkpoint/')
 # For downloading the bert model
 Use the code below to download bert uncased. The first line will download the bert model. Locate the vocab.txt file under assets and provide the path in the code below. Link[https://drive.google.com/file/d/1QBdDJc5UIv4sL8WPU3K6pkBEnlGasLoq/]
 ```
+from transformers import TFBertModel
+
 encoder = TFBertModel.from_pretrained("bert-base-uncased")
 vocab = "/path/to/vocab.txt"
 tokenizer = BertWordPieceTokenizer(vocab, lowercase=True)
